@@ -35,24 +35,6 @@ const UserList = (props) => {    //{expenses,setExpenses}
         sum += parseInt(exp.amount);
     });
 
-    //delete
-    const handleDelete = async(id) => {
-        const response=await axios.delete(`https://expense-backend-50gb.onrender.com/api/${id}`)
-        const deletedArray = expenses&&expenses?.filter((user) => user._id != id)
-        setExpenses(deletedArray)
-    }
- 
-
-     //update
-     const handleUpdate = (user) => {
-        setEditid(user._id)
-        setisEdit(true)
-        setDate(user.date)
-        setCategory(user.category)
-        setAmount(user.amount)
-    }
-
-
 
     //create new expense
 
@@ -94,6 +76,24 @@ const UserList = (props) => {    //{expenses,setExpenses}
     };
 
     
+    //delete
+    const handleDelete = async(id) => {
+        const response=await axios.delete(`https://expense-backend-50gb.onrender.com/api/${id}`)
+        const deletedArray = expenses&&expenses?.filter((user) => user._id != id)
+        setExpenses(deletedArray)
+    }
+ 
+
+     //update
+     const handleUpdate = (user) => {
+        setEditid(user._id)
+        setisEdit(true)
+        setDate(user.date)
+        setCategory(user.category)
+        setAmount(user.amount)
+    }
+
+
 
 
     //display
@@ -104,6 +104,7 @@ const UserList = (props) => {    //{expenses,setExpenses}
         //  <a href="/about">atag</a> */}
             <div style={{ flex: 50, padding: "50px" }}>
                 <form onSubmit={(e) => handleAddExpense(e)}>
+                    <h3> Enter your Expenses Here...</h3><br></br>
                 {/* //  <input type="text" placeholder="Date" value={date} onChange={handleDate} style={{ border: "2px solid black" }} /><br></br><br></br>
                 //  <input type="text" placeholder="Category" value={categotry} onChange={handleCategory} style={{ border: "2px solid black" }} /><br></br><br></br> */}
                     <select value={category} onChange={handleCategory} style={{ border: "2px solid black" }}>
@@ -111,12 +112,18 @@ const UserList = (props) => {    //{expenses,setExpenses}
                         <option >Income</option>
                         <option >Loan</option>
                         <option >Rent</option>
+                        <option >Shopping</option>
+                        <option >Grocery</option>
+                        <option >Outing</option>
+                        <option >Movie</option>
+                        <option >Petrol</option>
                     </select><br></br> <br></br>
                     <input type="number" placeholder="Amount" value={amount} onChange={handleAmount} style={{ border: "2px solid black" }} required /><br></br><br></br>
                     <button type="submit">{isEdit ? "UPDATE" : "ADD"}</button>
                 </form>
             </div>
             <div style={{ flex: 50, padding: "50px" }}>
+                <h3> List of Expenses..</h3>
 
                 <table className="table" style={{ border: "2px", borderCollapse: "collapse" }}>
                     <thead>
